@@ -6,7 +6,7 @@ int computeExpression(std::string expression, bool& legal)
 {
     // version 0: suppose expression contain only + - * / number, not contain () [] {}
     auto size = expression.size();
-    int index = expression.find_first_of("*/");
+    int index = expression.find("*/");
     if(index != std::string::npos)
     {
         int i=1;
@@ -70,70 +70,6 @@ int computeExpression(std::string expression, bool& legal)
             substr = std::to_string(a/b);
         expression.insert(index-i+1,substr);
         expression.erase(index-i+1+substr.size(),i+j+1);
-        return computeExpression(expression,legal);
-    }
-    index = expression.find_first_of("+-");
-    if(index != std::string::npos)
-    {
-        int i=1;
-        std::string lv,rv;
-        // index->left detect
-        // out of range,stop
-        // number, save to lv
-        // operator(+-*/),stop
-        while((index-i<=0) && (expression[index-i]>=48) && (expression[index-i]<=57))
-        {
-            lv = std::string(1,expression[index-i])+lv;
-            i++;
-        }
-        if(lv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int a = std::stoi(lv);
-        int j = 1;
-        int negative = 1;
-        // index->right detect
-        // out of range, stop
-        // +,ignore
-        // -,save to negative
-        // number, save to rv
-        // *,/,stop
-        while((index+j<size) && (expression[index+j]!='*') && (expression[index+j]!='/'))
-        {
-            if(expression[index+j] == '+')
-            {
-                if(rv.size() == 0)
-                    continue;
-                else
-                    break;
-            }
-            else if(expression[index+j] == '-')
-            {
-                if(rv.size() == 0)
-                    negative *=-1;
-                else
-                    break;
-            }
-            else
-            {
-                rv = std::string(1,expression[index+j])+rv;
-            }
-            j++;
-        }
-        if(rv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int b = std::stoi(rv);
-        b*=negative;
-        std::string substr;
-        substr = std::to_string(a+b);
-        expression.insert(index-i+1,substr);
-        expression.erase(index-i+1+substr.size(),i+j+1);
-        return computeExpression(expression,legal);
     }
 }
 int main()
