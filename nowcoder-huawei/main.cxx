@@ -1,147 +1,253 @@
 #include <string>
 #include <iostream>
 #include <vector>
-
+bool noIllegalCharacter(std::string expression)
+{
+    auto size = expression.size();
+    for(int i=0;i<size;i++)
+    {
+        if((expression[i] == '+')||(expression[i] == '-')||(expression[i] == '*')||(expression[i] == '/'))
+        {
+            continue;
+        }
+        else if((expression[i] == ')')||(expression[i] == '(')||(expression[i] == '[')||(expression[i] == ']')||(expression[i] == '{')||(expression[i] == '}'))
+        {
+            continue;
+        }
+        else if((expression[i]>=48) && (expression[i]<=57))
+        {
+            continue;
+        }
+        else
+        {
+            std::cout<<"illegal character:"<<std::string(1,expression[i])<<" "<<i<<std::endl;
+            return false;
+        }
+    }
+    return true;
+}
 int computeExpression(std::string expression, bool& legal)
 {
-    // version 0: suppose expression contain only + - * / number, not contain () [] {}
-    auto size = expression.size();
-    int index = expression.find_first_of("*/");
-    if(index != std::string::npos)
+    //suppose expression contain just *, -, +, /, number character
+    std::cout<<"expression: "<<expression<<std::endl;
+    int result = 0;
+    if(legal == false)
     {
-        int i=1;
-        std::string lv,rv;
-        // index->left detect
-        // out of range,stop
-        // number, save to lv
-        // operator(+-*/),stop
-        while((index-i<=0) && (expression[index-i]>=48) && (expression[index-i]<=57))
+        std::cout<<"\t"<<"illegal expression"<<std::endl;
+        result = 0;
+    }
+    else
+    {
+        size_t index = expression.find_first_of("*/");
+        auto size = expression.size();
+        if(index == std::string::npos)
         {
-            lv = std::string(1,expression[index-i])+lv;
-            i++;
-        }
-        if(lv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int a = std::stoi(lv);
-        int j = 1;
-        int negative = 1;
-        // index->right detect
-        // out of range, stop
-        // +,ignore
-        // -,save to negative
-        // number, save to rv
-        // *,/,stop
-        while((index+j<size) && (expression[index+j]!='*') && (expression[index+j]!='/'))
-        {
-            if(expression[index+j] == '+')
+            std::cout<<"\t"<<" no * or / to compute"<<std::endl;
+            //compute + or -
+            index = expression.find_first_of("+-");
+            if(index == std::string::npos)
             {
-                if(rv.size() == 0)
-                    continue;
-                else
-                    break;
-            }
-            else if(expression[index+j] == '-')
-            {
-                if(rv.size() == 0)
-                    negative *=-1;
-                else
-                    break;
+                result = std::stoi(expression);
             }
             else
             {
-                rv = std::string(1,expression[index+j])+rv;
+                //1. it's a symbol
+                //2. it's a operator
+                result = 12;
             }
-            j++;
         }
-        if(rv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int b = std::stoi(rv);
-        b*=negative;
-        std::string substr;
-        if(expression[index] = '*')
-            substr = std::to_string(a*b);
         else
-            substr = std::to_string(a/b);
-        expression.insert(index-i+1,substr);
-        expression.erase(index-i+1+substr.size(),i+j+1);
-        return computeExpression(expression,legal);
-    }
-    index = expression.find_first_of("+-");
-    if(index != std::string::npos)
-    {
-        int i=1;
-        std::string lv,rv;
-        // index->left detect
-        // out of range,stop
-        // number, save to lv
-        // operator(+-*/),stop
-        while((index-i<=0) && (expression[index-i]>=48) && (expression[index-i]<=57))
         {
-            lv = std::string(1,expression[index-i])+lv;
-            i++;
-        }
-        if(lv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int a = std::stoi(lv);
-        int j = 1;
-        int negative = 1;
-        // index->right detect
-        // out of range, stop
-        // +,ignore
-        // -,save to negative
-        // number, save to rv
-        // *,/,stop
-        while((index+j<size) && (expression[index+j]!='*') && (expression[index+j]!='/'))
-        {
-            if(expression[index+j] == '+')
+            //take left operand
+            //1. +,-, invalid
+            //2. number character
+            //3. it's out of range
+            int leftIndex = index-1;
+            if(leftIndex<0)
             {
-                if(rv.size() == 0)
-                    continue;
-                else
-                    break;
-            }
-            else if(expression[index+j] == '-')
-            {
-                if(rv.size() == 0)
-                    negative *=-1;
-                else
-                    break;
+                std::cout<<"\t"<<" * or / is the first character, no left operand"<<std::endl;
+                legal = false;
+                result = 0;
             }
             else
             {
-                rv = std::string(1,expression[index+j])+rv;
+                if((expression[leftIndex] == '+')||(expression[leftIndex] == '-'))
+                {
+                    std::cout<<"\t"<<" + or - before * or /"<<std::endl;
+                    legal = false;
+                    result = 0;
+                }
+                else
+                {
+                    //have at least one number character, so left operand is not empty
+                    int leftoperand = 0;
+                    while((leftIndex>=0)&&(expression[leftIndex] >=48) &&(expression[leftIndex]>=57))
+                    {
+                        leftIndex--;
+                    }
+                    //1. out of range
+                    //2. leftIndex is a operator
+                    if(leftIndex >= 0)
+                    {
+                        leftIndex++;
+                        leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
+                    }
+                    else
+                    {
+                        leftIndex = 0;
+                        leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
+                    }
+                    int rightIndex = index+1;
+                    //take right operand
+                    //1. it's operator, + or - or * or /
+                    //2. it's number character
+                    //3. it's out of range
+                    if(rightIndex>=size)
+                    {
+                        std::cout<<"\t"<<"* or / is the last operator, no right operand"<<std::endl;
+                        legal = false;
+                        result = 0;
+                    }
+                    else
+                    {
+                        if((expression[rightIndex] == '*')||(expression[rightIndex] == '/'))
+                        {
+                            std::cout<<"\t"<<" two * or / in serial, illegal"<<std::endl;
+                            legal = false;
+                            result = 0;
+                        }
+                        else// if((expression[rightIndex] == '+')||(expression[rightIndex] == '-'))
+                        {
+                            int negative = 1;
+                            while((rightIndex<size)&&((expression[rightIndex] == '+')||(expression[rightIndex] == '-')))
+                            {
+                                if(expression[rightIndex] == '-')
+                                    negative*=-1;
+                                rightIndex++;
+                            }
+                            //1. out of range
+                            //2. meet operator
+                            //3. meet number character
+                            if(rightIndex>=size)
+                            {
+                                std::cout<<"\t"<<" no number right to * or /"<<std::endl;
+                                legal = false;
+                                result = 0;
+                            }
+                            else if(expression[rightIndex] == '*' || expression[rightIndex] == '/')
+                            {
+                                    std::cout<<"\t"<<" * or / after some + or - after + or -"<<std::endl;
+                                    legal = false;
+                                    result = 0;
+                            }
+                            else
+                            {
+                                std::string tempstr(1,expression[rightIndex]);
+                                while((rightIndex<size)&&(expression[rightIndex]>=48)&&(expression[rightIndex]<=57))
+                                {
+                                    tempstr.append(1,expression[rightIndex]);
+                                    rightIndex++;
+                                }
+                                rightIndex--;
+                                int rightOperand = std::stoi(tempstr);
+                                rightOperand*=negative;
+                                std::string substr;
+                                if(expression[index] == '*')
+                                    substr = std::to_string(leftoperand*rightOperand);
+                                else
+                                    substr = std::to_string(leftoperand/rightOperand);
+                                expression.insert(leftIndex,substr);
+                                expression.erase(leftIndex+substr.size()+1,rightIndex-leftIndex+1);
+                                result = computeExpression(expression,legal);
+                            }
+                        }
+                    }
+                }
             }
-            j++;
+            
         }
-        if(rv.size() == 0)
-        {
-            legal = false;
-            return 0;
-        }
-        int b = std::stoi(rv);
-        b*=negative;
-        std::string substr;
-        substr = std::to_string(a+b);
-        expression.insert(index-i+1,substr);
-        expression.erase(index-i+1+substr.size(),i+j+1);
-        return computeExpression(expression,legal);
     }
+    return result;
 }
+std::string resolveBrackets(std::string expression, bool& legal)
+{
+    std::cout<<"expression: "<<expression<<std::endl;
+    std::string resultExpression;
+    if(legal == false)
+    {
+        std::cout<<"\t"<<"illegal expression"<<std::endl;
+        resultExpression = "";
+    }
+    else
+    {
+        size_t index = expression.find_last_of("([{");
+        if(index == std::string::npos)
+        {
+            
+            index = expression.find_first_of(")]}");
+            if(index == std::string::npos)
+            {
+                //return expression;
+                std::cout<<"\t"<<"no brackets at all"<<std::endl;
+                resultExpression = expression;
+            }
+            else
+            {
+                std::cout<<"\t"<<"no ([{ but have )]}"<<std::endl;
+                legal = false;
+                //return "";
+                resultExpression = "";
+            }
+        }
+        else
+        {
+            size_t end = expression.substr(index+1).find_first_of(")]}");
+            if(end == std::string::npos)
+            {
+                std::cout<<"\t"<<"have ([{ but no )]}"<<std::endl;
+                resultExpression = "";
+                legal = false;
+            }
+            else{
+                end+=index+1;
+                if((end<=index)||(end == index+1))
+                {
+                    std::cout<<"\t"<<")]} appear before ([{ or it's empty"<<std::endl;
+                    legal = false;
+                    //return "";
+                    resultExpression = "";
+                }
+                std::string substr = expression.substr(index+1,end-index-1);
+                int result = computeExpression(substr,legal);
+                if(legal == false)
+                {
+                    //return "";
+                    std::cout<<"\t"<<"expression in bracket is illegal"<<std::endl;
+                    resultExpression = "";
+                }
+                else
+                {
+                    std::cout<<"\t"<<"expression in bracket is:"<<substr<<std::endl;
+                    std::string insertstr = std::to_string(result);
+                    expression.insert(index,insertstr);
+                    expression.erase(index+insertstr.size(),end-index+1);
+                    //return resolveBrackets(expression,legal);
+                    resultExpression = resolveBrackets(expression,legal);
+                }
+            }
+        }
+    }
+    std::cout<<"after resolve:"<<resultExpression<<std::endl;
+    return resultExpression;
+}
+
 int main()
 {
     std::string expression;
     while(std::cin>>expression)
     {
-        bool flag= true;
+        bool flag= noIllegalCharacter(expression);
+        expression = resolveBrackets(expression,flag);
         int num = computeExpression(expression,flag);
         if(flag)
             std::cout<<num<<std::endl;
@@ -163,64 +269,19 @@ extra -+ will be seen as symbol not operator, it's legal
 extra *,/ is illegal
 
 what's legal?
-value or expression
+contain only legal character, and every character is meaningful, together compose a value or expression.
 expression made of a series of operator and operand
 legal operator: +,-,*,/,(),[],{}
 +,-,*,/ operator must have two operand, operand can be expression or value
 (),[],{} operator must have one operand, operand can be expression or value
 
-what is difficult?
-make sure the expression is fully checked.
+check expression till illegal or compute finished
+check has priority as with compute priority
+1. () [] {}
+2. * /
+3. + -
 
-example:
-1+(3+2)
-has two operator, first operator is +, operand is 1 and (3+2)
-second operator is +, operand is 3 and 2
-
-for a illegal expression, there's no priority law to use, 
-so shouldn't suppose a wait to detect expression is legal and use prioity law to decide detect order.
-
--3+-3*[-2+-3]
-((2*3))-4*[(3)+7]
--4+-+35-1*-/4
--4+-+35-(1*)-/4
-
-with expression
-case 0-1: expression is empty,
-    END: (0,illegal)
-case 0-2: expression not empty
-    case 0-2-1: expression contain illegal character
-        END: (0,illegal)
-    case 0-2-2: expression not empty, contain only legal character
-        case 0-2-2-1: expression contain ( or [ or {
-            case 0-2-2-1-1: ( or [ or { have match ) or ] or }
-                case 0-2-2-1-1-1: expression in () or [] or {} is legal
-                    END: (new expression, legal)
-                case 0-2-2-1-1-2: expression in () or [] or {} is illegal
-                    END: (0, illegal)
-            case 0-2-2-1-2: ( or [ or { have no match ) or ] or }
-                END: (0,illegal)
-        case 0-2-2-2: expression contain no ( or [ or {
-            case 0-2-2-2-1: expression contain ) or ] or }
-                END: (0,illegal)
-            case 0-2-2-2-2: expression contain no () or [] or {}
-            (may contain number, +, -, *, /)
-                case 0-2-2-2-2-1: contain * or /
-                    left operand
-                    right operand
-                    END: (new expression)
-                case 0-2-2-2-2-2: contain no * or /
-                (may contain number + -)
-                    case 0-2-2-2-2-2-1: contain + or -
-                    (contain + -, may contain number)
-                    case 0-2-2-2-2-2-2: contain no + or -
-                    (contain only number)
-                        END: (std::stoi(expression),legal)
-
-expression only contain + - * / number, how to compute legal and result
-- + may be symbol or operator, as symbol it has two operator in serial   
-+ symbol operator is useless, erase directly
-- symbol operator only save one  
-operator's operand may be symbol operand
-left symbol operand, 
+suppose have a operator /+-
+left operand may be:
+1. 
 */
