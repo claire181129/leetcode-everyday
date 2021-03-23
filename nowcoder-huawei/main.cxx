@@ -47,12 +47,23 @@ int computeExpression(std::string expression, bool& legal)
             index = expression.find_first_of("+-");
             if(index == std::string::npos)
             {
+                //no any operator, it's a number
                 result = std::stoi(expression);
             }
             else
             {
                 //1. it's a symbol
                 //2. it's a operator
+                int leftIndex = index-1;
+                if(leftIndex<0)
+                {
+                    //1. it's a legal symbol, or a illegal character, there's no expression to compute
+                    //2. there's still expression to compute
+                    std::cout<<"\t"<<" + or - is the first character, no left operand"<<std::endl;
+                    int rightIndex = index+1;
+                    while(()&&(expression[rightIndex]))
+                    
+                }
                 result = 12;
             }
         }
@@ -80,6 +91,7 @@ int computeExpression(std::string expression, bool& legal)
                 else
                 {
                     //have at least one number character, so left operand is not empty
+                    std::cout<<"* or /'s leftoperand not empty, * or / index:"<<index<<std::endl;
                     int leftoperand = 0;
                     while((leftIndex>=0)&&(expression[leftIndex] >=48) &&(expression[leftIndex]>=57))
                     {
@@ -87,16 +99,18 @@ int computeExpression(std::string expression, bool& legal)
                     }
                     //1. out of range
                     //2. leftIndex is a operator
+                    std::cout<<"\t"<<"leftIndex:"<<leftIndex<<std::endl;
                     if(leftIndex >= 0)
                     {
-                        leftIndex++;
                         leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
+                        //leftIndex++;
                     }
                     else
                     {
                         leftIndex = 0;
                         leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
                     }
+                    std::cout<<"\t"<<"leftoperand:"<<leftoperand<<std::endl;
                     int rightIndex = index+1;
                     //take right operand
                     //1. it's operator, + or - or * or /
@@ -142,7 +156,8 @@ int computeExpression(std::string expression, bool& legal)
                             }
                             else
                             {
-                                std::string tempstr(1,expression[rightIndex]);
+                                std::string tempstr;//(1,expression[rightIndex]);
+                                std::cout<<"\tmeet rightOperand's first number, index:"<<rightIndex<<" char:"<<tempstr<<std::endl;
                                 while((rightIndex<size)&&(expression[rightIndex]>=48)&&(expression[rightIndex]<=57))
                                 {
                                     tempstr.append(1,expression[rightIndex]);
@@ -150,14 +165,16 @@ int computeExpression(std::string expression, bool& legal)
                                 }
                                 rightIndex--;
                                 int rightOperand = std::stoi(tempstr);
+                                std::cout<<"\trightOperand:"<<rightOperand<<std::endl;
                                 rightOperand*=negative;
                                 std::string substr;
                                 if(expression[index] == '*')
                                     substr = std::to_string(leftoperand*rightOperand);
                                 else
                                     substr = std::to_string(leftoperand/rightOperand);
+                                std::cout<<"\tsub expression result:"<<substr<<std::endl;
                                 expression.insert(leftIndex,substr);
-                                expression.erase(leftIndex+substr.size()+1,rightIndex-leftIndex+1);
+                                expression.erase(leftIndex+substr.size(),rightIndex-leftIndex+1);
                                 result = computeExpression(expression,legal);
                             }
                         }
