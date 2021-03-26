@@ -1,62 +1,229 @@
 #include <iostream>
 #include <string>
-int computeStringDistance(std::string src, std::string target)
+int computeLevenshteinDistance(std::string src, std::string target)
 {
     auto size1 = src.size();
     auto size2 = target.size();
+    auto size = size1;
+    if(size<size2)
+        size = size2;
     int index = 0;
-    //delete in src
-    
+    int distance = 0;
+    while(index<size)
+    {
+        if(index>=size1 && index<size2)
+        {
+            src.append(1,target[index]);
+            distance++;
+        }
+        else if(index<size1 && index>=size2)
+        {
+            src.erase(index,1);
+            distance++;
+        }
+        else if(src[index]!=target[index])
+        {
+    //4.1 if next char1 == char2, delete
+    //4.2 if char1 == next char2, insert
+    //4.3 if next char1 == next char2, replace
+            int next_src_index = (index+1<size1)?index+1:-1, next_target_index = (index+1<size2)?index+1:-1;
+            if(next_src_index == -1 && next_target_index != -1)
+            {
+                #ifdef DEBUG
+                        std::cout<<"\t src have no next char, ";
+                #endif
+                if(src[index] == target[next_target_index])
+                {
+                    #ifdef DEBUG
+                        std::cout<<"insert "<<std::string(1,target[index])<<std::endl;
+                    #endif
+                    src.insert(index,1,target[index]);
+                    distance++;
+                }
+                else{
+                    #ifdef DEBUG
+                        std::cout<<"replace:"<<std::string(1,src[index])<<" with "<<std::string(1,target[index])<<std::endl;
+                    #endif
+                    char temp = target[index];
+                    target[index] = src[index];
+                    src[index] = temp;
+                    distance++;
+                }
+            }
+            else if(next_src_index != -1 && next_target_index == -1)
+            {
+                #ifdef DEBUG
+                        std::cout<<"\t target have no next char, ";
+                #endif
+                if(src[next_src_index] == target[index])
+                {
+                    #ifdef DEBUG
+                        std::cout<<"delete "<<std::string(1,src[index])<<std::endl;
+                    #endif
+                    src.erase(index,1);
+                    distance++;
+                }
+                else{
+                    #ifdef DEBUG
+                        std::cout<<"replace:"<<std::string(1,src[index])<<" with "<<std::string(1,target[index])<<std::endl;
+                    #endif
+                    char temp = target[index];
+                    target[index] = src[index];
+                    src[index] = temp;
+                    distance++;
+                }
+            }
+            else if(next_src_index == -1 && next_target_index == -1)
+            {
+                #ifdef DEBUG
+                        std::cout<<"\t neighter have next char, replace:"<<std::string(1,src[index])<<" with "<<std::string(1,target[index])<<std::endl;
+                #endif
+                char temp = target[index];
+                target[index] = src[index];
+                src[index] = temp;
+                distance++;
+            }
+            else
+            {
+                #ifdef DEBUG
+                        std::cout<<"\t both have next char, ";
+                #endif
+                if(src[next_src_index] == target[index])
+                {
+                    #ifdef DEBUG
+                        std::cout<<"delete "<<std::string(1,src[index])<<std::endl;
+                    #endif
+                    src.erase(index,1);
+                    distance++;
+                }
+                else if(src[index] == target[next_target_index])
+                {
+                    #ifdef DEBUG
+                        std::cout<<"insert "<<std::string(1,target[index])<<std::endl;
+                    #endif
+                    src.insert(index,1,target[index]);
+                    distance++;
+                }
+                else{
+                    #ifdef DEBUG
+                        std::cout<<"replace:"<<std::string(1,src[index])<<" with "<<std::string(1,target[index])<<std::endl;
+                    #endif
+                    char temp = target[index];
+                    target[index] = src[index];
+                    src[index] = temp;
+                    distance++;
+                }
+            }
+        }
+        index++;
+        size1 = src.size();
+        size2 = target.size();
+    }
+    return distance;
+}
+int computeStringDistance(std::string src, std::string target)
+{
+    #ifdef DEBUG
+        std::cout<<"src:"<<src<<" target:"<<target<<std::endl;
+    #endif
+    int distance = 0;
+    auto size1 = src.size();
+    auto size2 = target.size();
+    int index = 0;
+    std::string str1;
+    std::string str2;
+    auto size = size1;
+    if(size>size2)
+        size = size2;
+    for(int i=0;i<size;i++)
+    {
+        if(src[i] != target[i])
+        {
+            str1.append(1,src[i]);
+            str2.append(1,target[i]);
+        }
+    }
+    if(size1>size2)
+    {
+        for(int i=size2;i<size1;i++)
+            str1.append(1,src[i]);
+    }
+    else if(size<size2)
+    {
+        for(int i=size1;i<size2;i++)
+            str2.append(1,target[i]);
+    }
+    #ifdef DEBUG
+        std::cout<<"after remove matched char, src:"<<str1<<" target:"<<str2<<std::endl;
+    #endif
+    if(str1.size() == 0 && str2.size() == 0)
+        distance = 0;
+    else
+    {
+
+    }
+    return distance;
 }
 int main()
 {
     std::string src,target;
     while(std::cin>>src>>target)
     {
-        std::cout<<computeStringDistance(src,target)<<std::endl;
+        std::cout<<computeLevenshteinDistance(src,target)<<std::endl;
     }
     return 0;
 }
 
 /*
-1. src->target, target->src, the distance is same
-2. there's no situation that delete insert can compose better solution than replace
-3. suppose no delete insert, just replace, n different, m*2 switch, result distance is n-1-m
+new question: compute XXXDistance
+XXXDistance:
+1. delete a character
+2. insert a character
+3. switch two character
 
-delete&insert must be twice*n, but replace n-1, when n<1, 2*n<n-1, so no situation.
+input: abcdefg, abcdef
+input: abcde, abcdf
+input: abcde, bcdef
 
-so case will be divide into:
-1. same
-2. diffirent
-    2.1 replace - no replace
-    2.2 delete - no delete
-    2.3 insert - no insert
+1. delete
+2. insert
+3. replace
 
-how to make sure the work is complete
-case : abcde, acbdf
-char by char, in range
-there's one string is unchanged, so no need to check that string
+how to decide delete/insert/replace?
+1. char == char, not changed
+2. no char, char, insert
+3. char, no char, delete
+4. char != char
+    4.1 if next char1 == char2, delete
+    4.2 if char1 == next char2, insert
+    4.3 if next char1 == next char2, replace
 
-first insert char in target that src don't have,so after this, target contain no char src don't have
-then delete char in src that target don't have
-c in src[abcde]
-    c = a
-        1. c is in target
-            1.1 c is in same place with target
-                END: no change
-            1.2 c is in different place with target
-                1.2.1 need replace
-                    1.2.1.1  
-        2. c is not in target, 
-            END: delete
-1. delete: how to delete in src, how to make sure it's extra? 
-    string -> char, count
-    no char, delete
-    char count bigger, delete
-2. insert: how to insert in src? 
-    char, count
-    no char, insert
-    char count smaller, insert
-3. 
+input: abcdefg, abcdef
+distance = 1
+index = 0, a == a
+index = 1, b == b
+...
+index = 6, g != null, delete, distance ++
+output: 1
 
+input: abcde, abcdf
+index = 0, a == a
+...
+index = 4, e != f, both no next char, so replace, distance ++
+output: 1
+
+input: abcde, bcdef
+index = 0, a != b, a!=c, b!=c,b==b, delete, distance++
+bcde, bcdef
+index = 1, c == c
+index = 2, d == d
+...
+index = 4, null != f, insert, distance++
+output: 2
+
+input: abcd, abecd
+
+input: abdf,cdf
+delete a, bdf-cdf, replace b with c, distance = 2
+replace a with c, cbdf-cdf, delete b, distance = 2
 */

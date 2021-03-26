@@ -7,6 +7,7 @@ Solutions of algorithm questions from leetcode and other website.
 | 2021-03-18 | nowcoder huawei-interview simple almost done(HJ64 & HJ66) |
 | 2021-03-19 | nowcoder huawei-interview simple x 1 medium x 2  |
 | 2021-03-25 | nowcoder huawei-interview simple done medium x 2 |
+| 2021-03-26 | nowcoder huawei-interview medium x 3(HJ99,HJ102,HJ52) |
 
 
 about algorithm question:
