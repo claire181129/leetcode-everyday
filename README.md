@@ -7,8 +7,9 @@ Solutions of algorithm questions from leetcode and other website.
 | 2021-03-18 | nowcoder huawei-interview simple almost done(HJ64 & HJ66) |
 | 2021-03-19 | nowcoder huawei-interview simple x 1 medium x 2  |
 | 2021-03-25 | nowcoder huawei-interview simple done medium x 2 |
-| 2021-03-26 | nowcoder huawei-interview medium x 3(HJ99,HJ102,HJ52) |
-
+| 2021-03-26 | nowcoder huawei-interview medium x 2(HJ99,HJ102) |
+| 2021-03-29 | nowcoder huawei-interview medium x 3(HJ21,HJ26,HJ36) |
+| 2021-03-30 | nowcoder huawei-interview medium x 2(HJ57,HJ46,HJ67) |
 
 about algorithm question:
 1. case study, manually compute the example case, see how you get the result.
@@ -21,3 +22,6 @@ about algorithm question:
 8. There's no target, you're just talking, say what you want, say what appear in your head.
 9. Limit , quit
 10. Theory vs practice, reality is ugly, but it's alive and playable, and can live better.
+11. code block completity, code should be in block, should be tested as block, should be block complete(what's input, what's output).
+12. code that's not elegant, not short, not clear, not block complete, is not code, it's trash. like HJ67.
+13. If you're sure you're doing it wrong way, and you already got bad feeling, you should quit, take a break.

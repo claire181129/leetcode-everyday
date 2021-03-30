@@ -1,7 +1,5 @@
-#include <string>
 #include <iostream>
 #include <vector>
-//HJ54 表达式求值
 bool noIllegalCharacter(std::string expression)
 {
     auto size = expression.size();
@@ -30,11 +28,15 @@ bool noIllegalCharacter(std::string expression)
 int computeExpression(std::string expression, bool& legal)
 {
     //suppose expression contain just *, -, +, /, number character
-    //std::cout<<"expression: "<<expression<<std::endl;
+    #ifdef DEBUG
+        std::cout<<"expression: "<<expression<<std::endl;
+    #endif
     int result = 0;
     if(legal == false)
     {
-        //std::cout<<"\t"<<"illegal expression"<<std::endl;
+        #ifdef DEBUG
+            std::cout<<"\t"<<"illegal expression"<<std::endl;
+        #endif
         result = 0;
     }
     else
@@ -44,18 +46,24 @@ int computeExpression(std::string expression, bool& legal)
         auto size = expression.size();
         if(index == std::string::npos)
         {
-            //std::cout<<"\t"<<" no * or / to compute"<<std::endl;
+            #ifdef DEBUG
+                std::cout<<"\t"<<" no * or / to compute"<<std::endl;
+            #endif
             //compute + or -, no * or / operator
             index = expression.find_first_of("+-");
             if(index == std::string::npos)
             {
                 //no any operator, it's a number
-                //std::cout<<"\t no + or - operator found, expression is pure number, expression:"<<expression<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t no + or - operator found, expression is pure number, expression:"<<expression<<std::endl;
+                #endif
                 result = std::stoi(expression);
             }
             else
             {
-                //std::cout<<"\t found + or - operator, index:"<<index<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t found + or - operator, index:"<<index<<std::endl;
+                #endif
                 //1. it's a symbol
                 //2. it's a operator
                 int leftIndex = index-1;
@@ -64,7 +72,9 @@ int computeExpression(std::string expression, bool& legal)
                 if(leftIndex<0)
                 {
                     //1. leftIndex<0, index == 0, it must be a symbol, no leftoperand
-                    //std::cout<<"\t leftIndex < 0, + or - is the first character, no left operand, leftIndex:"<<leftIndex<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t leftIndex < 0, + or - is the first character, no left operand, leftIndex:"<<leftIndex<<std::endl;
+                    #endif
                     int rightIndex = index+1;
                     while((rightIndex<size)&&(expression[rightIndex] >= 48)&&(expression[rightIndex]<=57))
                     {
@@ -75,7 +85,9 @@ int computeExpression(std::string expression, bool& legal)
                     //2. rightIndex < size, meet not number character
                     if(rightIndex<size)
                     {
-                        //std::cout<<"\t meet non number character, rightIndex:"<<rightIndex<<std::endl;
+                        #ifdef DEBUG
+                            std::cout<<"\t meet non number character, rightIndex:"<<rightIndex<<std::endl;
+                        #endif
                         //2. rightIndex < size, meet not number character
                         //the position is like
                         //1. index,rightIndex
@@ -84,7 +96,9 @@ int computeExpression(std::string expression, bool& legal)
                         {
                             //1. index,rightIndex, rightIndex point to non number character, in range
                             //index is a symbol
-                            //std::cout<<"\t rightIndex == index+1"<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\t rightIndex == index+1"<<std::endl;
+                            #endif
                             while((rightIndex<size)&&((expression[rightIndex] == '+')||(expression[rightIndex] == '-')))
                             {
                                 rightIndex++;
@@ -94,7 +108,9 @@ int computeExpression(std::string expression, bool& legal)
                             if(rightIndex >=size)
                             {
                                 //1. rightIndex is out of range
-                                //std::cout<<"\t illegal, no right operand, all character after + or - is + or -, rightIndex out of range, rightIndex:"<<rightIndex<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t illegal, no right operand, all character after + or - is + or -, rightIndex out of range, rightIndex:"<<rightIndex<<std::endl;
+                                #endif
                                 legal = false;
                                 result = 0;
                             }
@@ -102,14 +118,18 @@ int computeExpression(std::string expression, bool& legal)
                             {
                                 //2. rightIndex point to a number character
                                 //remove extra symbol
-                                //std::cout<<"\t from index:"<<index<<" to rightIndex-1:"<<rightIndex-1<<" is all symbol:"<<expression<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t from index:"<<index<<" to rightIndex-1:"<<rightIndex-1<<" is all symbol:"<<expression<<std::endl;
+                                #endif
                                 int negative = 1;
                                 for(int i=index;i<rightIndex;i++)
                                 {
                                     if(expression[i] == '-')
                                         negative*=-1;
                                 }
-                                //std::cout<<"\tnegative:"<<negative<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\tnegative:"<<negative<<std::endl;
+                                #endif
                                 std::string substr;
                                 if(negative == 1) 
                                     substr = "";
@@ -117,7 +137,9 @@ int computeExpression(std::string expression, bool& legal)
                                     substr = "-";
                                 expression.insert(index,substr);
                                 expression.erase(index+substr.size(),rightIndex-index);
-                                //std::cout<<"\tafter remove symbol, expression:"<<expression<<" substr:"<<substr<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\tafter remove symbol, expression:"<<expression<<" substr:"<<substr<<std::endl;
+                                #endif
                                 result = computeExpression(expression,legal);
                             }
                         }
@@ -128,7 +150,9 @@ int computeExpression(std::string expression, bool& legal)
                             //2. index, ..., rightIndex, there is number between index and rightIndex
                             leftIndex = index;
                             index = rightIndex;
-                            //std::cout<<"\t has left operand, leftIndex:"<<leftIndex<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\t has left operand, leftIndex:"<<leftIndex<<std::endl;
+                            #endif
                             int leftOperand = std::stoi(expression.substr(leftIndex+1,index-leftIndex-1));
                             if(expression[leftIndex] == '-')
                                 leftOperand = -leftOperand;
@@ -136,13 +160,17 @@ int computeExpression(std::string expression, bool& legal)
                             if(rightIndex>=size)
                             {
                                 //1. rightIndex>=size, out of range, no right operand
-                                //std::cout<<"\t no right operand"<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t no right operand"<<std::endl;
+                                #endif
                                 result = leftOperand;
                             }
                             else
                             {
                                 //2. rightIndex<size, in range, try take right operand
-                                //std::cout<<"\t rightIndex<size"<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t rightIndex<size"<<std::endl;
+                                #endif
                                 while((rightIndex<size)&&(expression[rightIndex]>=48)&&(expression[rightIndex]<=57))
                                 {
                                     rightIndex++;
@@ -160,16 +188,22 @@ int computeExpression(std::string expression, bool& legal)
                                     {
                                         result = leftOperand - rightOperand;
                                     }
-                                    //std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                    #endif
                                     std::string substr = std::to_string(result);
                                     expression.insert(index,substr);
                                     expression.erase(index+substr.size(),rightIndex-leftIndex);
-                                    //std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                                    #endif
                                 }
                                 else
                                 {
                                     //2. rightIndex in range
-                                    //std::cout<<"\trightIndex in range, rightIndex:"<<rightIndex<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\trightIndex in range, rightIndex:"<<rightIndex<<std::endl;
+                                    #endif
                                     if(rightIndex == index+1)
                                     {
                                         //may be a signed number
@@ -180,13 +214,17 @@ int computeExpression(std::string expression, bool& legal)
                                         }
                                         if(tempIndex>=size)
                                         {
-                                            //std::cout<<"\tillegal, noright number, tempIndex:"<<tempIndex<<std::endl;
+                                            #ifdef DEBUG
+                                                std::cout<<"\tillegal, noright number, tempIndex:"<<tempIndex<<std::endl;
+                                            #endif
                                             legal = false;
                                             result = 0;
                                         }
                                         else
                                         {
-                                            //std::cout<<"\t right operand is a signed number"<<std::endl;
+                                            #ifdef DEBUG
+                                                std::cout<<"\t right operand is a signed number"<<std::endl;
+                                            #endif
                                             int negative = 1;
                                             for(int i=index+1;i<tempIndex;i++)
                                             {
@@ -207,7 +245,9 @@ int computeExpression(std::string expression, bool& legal)
                                             std::string substr = std::to_string(result);
                                             expression.insert(leftIndex,substr);
                                             expression.erase(leftIndex+substr.size(),rightIndex-leftIndex);
-                                            //std::cout<<"\tcompute "<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<" substr:"<<substr<<" after compute expression"<<expression<<std::endl;
+                                            #ifdef DEBUG
+                                                std::cout<<"\tcompute "<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<" substr:"<<substr<<" after compute expression"<<expression<<std::endl;
+                                            #endif
                                         }
                                     }
                                     else
@@ -219,12 +259,16 @@ int computeExpression(std::string expression, bool& legal)
                                         {
                                             result = leftOperand-rightOperand;
                                         }
-                                        //std::cout<<"\tleftIndex:"<<leftIndex<<" rightIndex:"<<rightIndex<<std::endl;
-                                        //std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                        #ifdef DEBUG
+                                            std::cout<<"\tleftIndex:"<<leftIndex<<" rightIndex:"<<rightIndex<<std::endl;
+                                            std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                        #endif
                                         std::string substr = std::to_string(result);
                                         expression.insert(leftIndex,substr);
                                         expression.erase(leftIndex+substr.size(),rightIndex-leftIndex);
-                                        //std::cout<<"\tfdfdafter compute, expression:"<<expression<<std::endl;
+                                        #ifdef DEBUG
+                                            std::cout<<"\tfdfdafter compute, expression:"<<expression<<std::endl;
+                                        #endif
                                         return computeExpression(expression,legal);
                                     }
                                 }
@@ -240,19 +284,25 @@ int computeExpression(std::string expression, bool& legal)
                         if(index == size-1)
                         {
                             //1. index,rightIndex
-                            //std::cout<<"\tillegal, index == size-1, operator has no right number:"<<rightIndex<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\tillegal, index == size-1, operator has no right number:"<<rightIndex<<std::endl;
+                            #endif
                             legal = false;
                             result = 0;
                         }
                         else
                         {
                             //2. index, ..., rightIndex
-                            //std::cout<<"\tindex,...,rightIndex, rightIndex:"<<rightIndex<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\tindex,...,rightIndex, rightIndex:"<<rightIndex<<std::endl;
+                            #endif
                             if(expression[index] == '+')
                                 result = std::stoi(expression.substr(index+1));
                             else
                                 result = std::stoi(expression);
-                            //std::cout<<"\tit's a number, no expression to compute, expression:"<<expression<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\tit's a number, no expression to compute, expression:"<<expression<<std::endl;
+                            #endif
                             return result;
                         }
                     }
@@ -269,7 +319,9 @@ int computeExpression(std::string expression, bool& legal)
                     int leftOperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
                     if(index == size-1)
                     {
-                        //std::cout<<"\tillegal, operator is the last char, index:"<<index<<std::endl;
+                        #ifdef DEBUG
+                            std::cout<<"\tillegal, operator is the last char, index:"<<index<<std::endl;
+                        #endif
                         legal= false;
                         result = 0;
                     }
@@ -291,7 +343,9 @@ int computeExpression(std::string expression, bool& legal)
                                 }
                                 if(tempIndex>=size)
                                 {
-                                    //std::cout<<"\tillegal, all operator, no number"<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\tillegal, all operator, no number"<<std::endl;
+                                    #endif
                                     legal = false;
                                     result = 0;
                                 }
@@ -300,7 +354,9 @@ int computeExpression(std::string expression, bool& legal)
                                     for(int i=rightIndex;i<tempIndex;i++)
                                         if(expression[i]=='-')
                                             negative*=-1;
-                                    //std::cout<<"\trightIndex:"<<rightIndex<<" tempIndex:"<<tempIndex<<" negative:"<<negative<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\trightIndex:"<<rightIndex<<" tempIndex:"<<tempIndex<<" negative:"<<negative<<std::endl;
+                                    #endif
                                     rightIndex = tempIndex;
                                     while((rightIndex<size)&&(expression[rightIndex]>=48)&&(expression[rightIndex]<=57))
                                     {
@@ -314,11 +370,15 @@ int computeExpression(std::string expression, bool& legal)
                                         result = leftOperand+rightOperand;
                                     else
                                         result = leftOperand-rightOperand;
-                                    //std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                    #endif
                                     std::string substr = std::to_string(result);
                                     expression.insert(leftIndex,substr);
                                     expression.erase(leftIndex+substr.size(),rightIndex-leftIndex);
-                                    //std::cout<<"\tafter compute expression:"<<expression<<std::endl;
+                                    #ifdef DEBUG
+                                        std::cout<<"\tafter compute expression:"<<expression<<std::endl;
+                                    #endif
                                     result = computeExpression(expression,legal);
                                 }
                             }
@@ -329,12 +389,15 @@ int computeExpression(std::string expression, bool& legal)
                                     result = leftOperand+rightOperand;
                                 else
                                     result = leftOperand-rightOperand;
-                                
-                                //std::cout<<"\t "<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t "<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                                #endif
                                 std::string substr = std::to_string(result);
                                 expression.insert(leftIndex,substr);
                                 expression.erase(leftIndex+substr.size(),rightIndex-leftIndex);
-                                //std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                                #endif
                                 return computeExpression(expression,legal);
                             }
                         }
@@ -346,11 +409,15 @@ int computeExpression(std::string expression, bool& legal)
                             else
                                 result = leftOperand-rightOperand;
                             std::string substr = std::to_string(result);
-                            //std::cout<<"\tindex:"<<index<<" leftIndex:"<<leftIndex<<" rightIndex:"<<rightIndex<<std::endl;
-                            //std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\tindex:"<<index<<" leftIndex:"<<leftIndex<<" rightIndex:"<<rightIndex<<std::endl;
+                                std::cout<<"\t"<<leftOperand<<std::string(1,expression[index])<<rightOperand<<"="<<result<<std::endl;
+                            #endif
                             expression.insert(leftIndex,substr);
                             expression.erase(leftIndex+substr.size(),rightIndex-leftIndex);
-                            //std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\tafter compute, expression:"<<expression<<std::endl;
+                            #endif
                             return computeExpression(expression,legal);
                         }
                     }
@@ -366,7 +433,9 @@ int computeExpression(std::string expression, bool& legal)
             int leftIndex = index-1;
             if(leftIndex<0)
             {
-                //std::cout<<"\t"<<" * or / is the first character, no left operand"<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t"<<" * or / is the first character, no left operand"<<std::endl;
+                #endif
                 legal = false;
                 result = 0;
             }
@@ -374,14 +443,18 @@ int computeExpression(std::string expression, bool& legal)
             {
                 if((expression[leftIndex] == '+')||(expression[leftIndex] == '-'))
                 {
-                    //std::cout<<"\t"<<" + or - before * or /"<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<" + or - before * or /"<<std::endl;
+                    #endif
                     legal = false;
                     result = 0;
                 }
                 else
                 {
                     //have at least one number character, so left operand is not empty
-                    //std::cout<<"\t* or /'s leftoperand not empty, * or / index:"<<index<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t* or /'s leftoperand not empty, * or / index:"<<index<<std::endl;
+                    #endif
                     int leftoperand = 0;
                     while((leftIndex>=0)&&(expression[leftIndex] >=48) &&(expression[leftIndex]<=57))
                     {
@@ -390,7 +463,9 @@ int computeExpression(std::string expression, bool& legal)
                     leftIndex++;
                     //1. out of range
                     //2. leftIndex is a operator
-                    //std::cout<<"\t"<<"leftIndex:"<<leftIndex<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<"leftIndex:"<<leftIndex<<std::endl;
+                    #endif
                     if(leftIndex >= 0)
                     {
                         leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
@@ -401,7 +476,9 @@ int computeExpression(std::string expression, bool& legal)
                         leftIndex = 0;
                         leftoperand = std::stoi(expression.substr(leftIndex,index-leftIndex));
                     }
-                    //std::cout<<"\t"<<"leftoperand:"<<leftoperand<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<"leftoperand:"<<leftoperand<<std::endl;
+                    #endif
                     int rightIndex = index+1;
                     //take right operand
                     //1. it's operator, + or - or * or /
@@ -409,7 +486,9 @@ int computeExpression(std::string expression, bool& legal)
                     //3. it's out of range
                     if(rightIndex>=size)
                     {
-                        //std::cout<<"\t"<<"* or / is the last operator, no right operand"<<std::endl;
+                        #ifdef DEBUG
+                            std::cout<<"\t"<<"* or / is the last operator, no right operand"<<std::endl;
+                        #endif
                         legal = false;
                         result = 0;
                     }
@@ -417,7 +496,9 @@ int computeExpression(std::string expression, bool& legal)
                     {
                         if((expression[rightIndex] == '*')||(expression[rightIndex] == '/'))
                         {
-                            //std::cout<<"\t"<<" two * or / in serial, illegal"<<std::endl;
+                            #ifdef DEBUG
+                                std::cout<<"\t"<<" two * or / in serial, illegal"<<std::endl;
+                            #endif
                             legal = false;
                             result = 0;
                         }
@@ -435,20 +516,26 @@ int computeExpression(std::string expression, bool& legal)
                             //3. meet number character
                             if(rightIndex>=size)
                             {
-                                //std::cout<<"\t"<<" no number right to * or /"<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\t"<<" no number right to * or /"<<std::endl;
+                                #endif
                                 legal = false;
                                 result = 0;
                             }
                             else if(expression[rightIndex] == '*' || expression[rightIndex] == '/')
                             {
-                                    //std::cout<<"\t"<<" * or / after some + or - after + or -"<<std::endl;
-                                    legal = false;
-                                    result = 0;
+                                #ifdef DEBUG
+                                    std::cout<<"\t"<<" * or / after some + or - after + or -"<<std::endl;
+                                #endif
+                                legal = false;
+                                result = 0;
                             }
                             else
                             {
                                 std::string tempstr;//(1,expression[rightIndex]);
-                                //std::cout<<"\tmeet rightOperand's first number, index:"<<rightIndex<<" char:"<<tempstr<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\tmeet rightOperand's first number, index:"<<rightIndex<<" char:"<<tempstr<<std::endl;
+                                #endif
                                 while((rightIndex<size)&&(expression[rightIndex]>=48)&&(expression[rightIndex]<=57))
                                 {
                                     tempstr.append(1,expression[rightIndex]);
@@ -456,14 +543,26 @@ int computeExpression(std::string expression, bool& legal)
                                 }
                                 rightIndex--;
                                 int rightOperand = std::stoi(tempstr);
-                                //std::cout<<"\trightOperand:"<<rightOperand<<std::endl;
+                                #ifdef DEBUG
+                                    std::cout<<"\trightOperand:"<<rightOperand<<std::endl;
+                                #endif
                                 rightOperand*=negative;
                                 std::string substr;
                                 if(expression[index] == '*')
                                     substr = std::to_string(leftoperand*rightOperand);
                                 else
-                                    substr = std::to_string(leftoperand/rightOperand);
-                                //std::cout<<"\tsub expression result:"<<substr<<std::endl;
+                                {
+                                    if(rightOperand == 0)
+                                    {
+                                        substr = "0";
+                                        legal = false;
+                                    }
+                                    else
+                                        substr = std::to_string(leftoperand/rightOperand);
+                                }
+                                #ifdef DEBUG
+                                    std::cout<<"\tsub expression result:"<<substr<<std::endl;
+                                #endif
                                 expression.insert(leftIndex,substr);
                                 expression.erase(leftIndex+substr.size(),rightIndex-leftIndex+1);
                                 result = computeExpression(expression,legal);
@@ -479,11 +578,15 @@ int computeExpression(std::string expression, bool& legal)
 }
 std::string resolveBrackets(std::string expression, bool& legal)
 {
-    //std::cout<<"expression: "<<expression<<std::endl;
+    #ifdef DEBUG
+        std::cout<<"expression: "<<expression<<std::endl;
+    #endif
     std::string resultExpression;
     if(legal == false)
     {
-        //std::cout<<"\t"<<"illegal expression"<<std::endl;
+        #ifdef DEBUG
+            std::cout<<"\t"<<"illegal expression"<<std::endl;
+        #endif
         resultExpression = "";
     }
     else
@@ -496,12 +599,16 @@ std::string resolveBrackets(std::string expression, bool& legal)
             if(index == std::string::npos)
             {
                 //return expression;
-                //std::cout<<"\t"<<"no brackets at all"<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t"<<"no brackets at all"<<std::endl;
+                #endif
                 resultExpression = expression;
             }
             else
             {
-                //std::cout<<"\t"<<"no ([{ but have )]}"<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t"<<"no ([{ but have )]}"<<std::endl;
+                #endif
                 legal = false;
                 //return "";
                 resultExpression = "";
@@ -512,7 +619,9 @@ std::string resolveBrackets(std::string expression, bool& legal)
             size_t end = expression.substr(index+1).find_first_of(")]}");
             if(end == std::string::npos)
             {
-                //std::cout<<"\t"<<"have ([{ but no )]}"<<std::endl;
+                #ifdef DEBUG
+                    std::cout<<"\t"<<"have ([{ but no )]}"<<std::endl;
+                #endif
                 resultExpression = "";
                 legal = false;
             }
@@ -520,7 +629,9 @@ std::string resolveBrackets(std::string expression, bool& legal)
                 end+=index+1;
                 if((end<=index)||(end == index+1))
                 {
-                    //std::cout<<"\t"<<")]} appear before ([{ or it's empty"<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<")]} appear before ([{ or it's empty"<<std::endl;
+                    #endif
                     legal = false;
                     //return "";
                     resultExpression = "";
@@ -530,12 +641,16 @@ std::string resolveBrackets(std::string expression, bool& legal)
                 if(legal == false)
                 {
                     //return "";
-                    //std::cout<<"\t"<<"expression in bracket is illegal"<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<"expression in bracket is illegal"<<std::endl;
+                    #endif
                     resultExpression = "";
                 }
                 else
                 {
-                    //std::cout<<"\t"<<"expression in bracket is:"<<substr<<std::endl;
+                    #ifdef DEBUG
+                        std::cout<<"\t"<<"expression in bracket is:"<<substr<<std::endl;
+                    #endif
                     std::string insertstr = std::to_string(result);
                     expression.insert(index,insertstr);
                     expression.erase(index+insertstr.size(),end-index+1);
@@ -545,7 +660,9 @@ std::string resolveBrackets(std::string expression, bool& legal)
             }
         }
     }
-    //std::cout<<"after resolve:"<<resultExpression<<std::endl;
+    #ifdef DEBUG
+        std::cout<<"after resolve:"<<resultExpression<<std::endl;
+    #endif
     return resultExpression;
 }
 

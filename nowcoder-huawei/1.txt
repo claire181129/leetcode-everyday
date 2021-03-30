@@ -1,0 +1,664 @@
+src:abcdefg
+target:abcdef
+	src longer than target, delete src,index:6
+src:abcdef
+target:abcdef
+1
+src:abcde
+target:abcdf
+	neither have next char, replace:e with f
+src:abcdf
+target:abcde
+1
+src:abcde
+target:bcdef
+	delete_count:4 insert_count:0 replace_count:0
+	both have next char, delete a
+	target longer than src, insert to src, index:4
+src:bcdef
+target:bcdef
+2
+src:abcd
+target:abecd
+	delete_count:0 insert_count:2 replace_count:0
+	both have next char, insert e
+src:abecd
+target:abecd
+1
+src:ixfkieaaocalmxhfifyadnouljtezrnpnfoenespcaenyvzcjtppsaxegmeytqrkvdwugvouskcnnqnmhepquncvyvgkansquaotkgvlvplktrabaikeuubfupunpztpvvzdqaqgfmtzxlcxsipltzwjegpqjzclclvjsmqbmiyzvcujpvhupyhvhhjq
+target:ganxioafstgdpceecubqrngumbpjvwxdpzmragsunvfnmejbcvsoydtbbewybygpsmmyjuvezn
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:i with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:x with a
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:f with n
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:k with x
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:e with o
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:a with f
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:o with s
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:c with t
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:a with g
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:l with d
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:m with p
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:x with c
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:h with e
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:f with e
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:i with c
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:f with u
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:y with b
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:a with q
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:d with r
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:o with g
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:l with m
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:j with b
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:t with p
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:e with j
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:z with v
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:r with w
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:n with x
+	delete_count:0 insert_count:3 replace_count:0
+	both have next char, insert d
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:n with z
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:f with m
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:o with r
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:e with a
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:n with g
+	delete_count:3 insert_count:0 replace_count:0
+	both have next char, delete e
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:p with u
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:c with n
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:a with v
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:e with f
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:y with m
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:v with e
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:z with j
+	delete_count:0 insert_count:2 replace_count:0
+	both have next char, insert b
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:j with v
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:t with s
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:p with o
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:p with y
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:s with d
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:a with t
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:x with b
+	delete_count:0 insert_count:3 replace_count:0
+	both have next char, insert b
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:g with w
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:m with y
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:e with b
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:t with g
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:q with p
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:r with s
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:k with m
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:v with m
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:d with y
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:w with j
+	delete_count:1 insert_count:0 replace_count:0
+	both have next char, delete g
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:o with e
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:u with z
+	target have no next char, replace:s with n
+	src longer than target, delete src,index:74
+	src longer than target, delete src,index:75
+	src longer than target, delete src,index:76
+	src longer than target, delete src,index:77
+	src longer than target, delete src,index:78
+	src longer than target, delete src,index:79
+	src longer than target, delete src,index:80
+	src longer than target, delete src,index:81
+	src longer than target, delete src,index:82
+	src longer than target, delete src,index:83
+	src longer than target, delete src,index:84
+	src longer than target, delete src,index:85
+	src longer than target, delete src,index:86
+	src longer than target, delete src,index:87
+	src longer than target, delete src,index:88
+	src longer than target, delete src,index:89
+	src longer than target, delete src,index:90
+	src longer than target, delete src,index:91
+	src longer than target, delete src,index:92
+	src longer than target, delete src,index:93
+	src longer than target, delete src,index:94
+	src longer than target, delete src,index:95
+	src longer than target, delete src,index:96
+	src longer than target, delete src,index:97
+	src longer than target, delete src,index:98
+	src longer than target, delete src,index:99
+	src longer than target, delete src,index:100
+	src longer than target, delete src,index:101
+	src longer than target, delete src,index:102
+	src longer than target, delete src,index:103
+	src longer than target, delete src,index:104
+	src longer than target, delete src,index:105
+	src longer than target, delete src,index:106
+	src longer than target, delete src,index:107
+	src longer than target, delete src,index:108
+	src longer than target, delete src,index:109
+	src longer than target, delete src,index:110
+	src longer than target, delete src,index:111
+	src longer than target, delete src,index:112
+	src longer than target, delete src,index:113
+	src longer than target, delete src,index:114
+	src longer than target, delete src,index:115
+	src longer than target, delete src,index:116
+	src longer than target, delete src,index:117
+	src longer than target, delete src,index:118
+	src longer than target, delete src,index:119
+	src longer than target, delete src,index:120
+	src longer than target, delete src,index:121
+	src longer than target, delete src,index:122
+	src longer than target, delete src,index:123
+	src longer than target, delete src,index:124
+	src longer than target, delete src,index:125
+	src longer than target, delete src,index:126
+	src longer than target, delete src,index:127
+	src longer than target, delete src,index:128
+	src longer than target, delete src,index:129
+	src longer than target, delete src,index:130
+	src longer than target, delete src,index:131
+src:ganxioafstgdpceecubqrngumbpjvwxdpzmragsunvfnmejbcvsoydtbbewybygpsmmyjuvezncnnhpucygasuokvvltaakubuuptvzqqftxcsptwepjccvsqmyvuphphhj
+target:ixfkieaaocalmxhfifyadnouljtezrndpnfoenspcaenyvzbcjtppsaxbegmeytqrkvdwuvous
+122
+src:ixotitbgzoknoghrrjjwageedzjaghsjvqeqptfphqkvdtevqjjxqgdwfqunvxpxthzzjeprbcvmyphduapyoargbqmizivhfryqdonlritniosmdvuiyhdoykojzvauymskrzrncufasqzuerdehpqceclpbjtvbebuullzaqtokgkfzznumkvvdgwvuiacetbcbmbcrdoemcfjbuw
+target:nqbgetlzozptuajfmvpzqqkuuxrwlhjcuyohpcnzpgkgmieuuavdetngrrxlxfauugyccklhjbsdqriznggbgvmcbamzdtdffpujnxhosgvbllnyoqpvuamsylyxtpqhcbfxhrdznwswmcxhvmrhttipapeshhdzjpmkucwqtztfsyxzwupmdgmlcatlqqwglekqmrojldjfjmthmiriyyavtznlosbixdtjxsjtzfyvvvwsqqfpmxbnkzwotuelfqjlctoaobu
+	delete_count:0 insert_count:0 replace_count:12
+	both have next char, replace:i with n
+	delete_count:0 insert_count:0 replace_count:12
+	both have next char, replace:x with q
+	delete_count:0 insert_count:0 replace_count:12
+	both have next char, replace:o with b
+	delete_count:0 insert_count:0 replace_count:12
+	both have next char, replace:t with g
+	delete_count:0 insert_count:0 replace_count:12
+	both have next char, replace:i with e
+	delete_count:0 insert_count:0 replace_count:11
+	both have next char, replace:b with l
+	delete_count:11 insert_count:0 replace_count:0
+	both have next char, delete g
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:k with z
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:n with p
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:o with t
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:g with u
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:h with a
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:r with j
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:r with f
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:j with m
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:j with v
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:w with p
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:a with z
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:g with q
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:e with q
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:e with k
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:d with u
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:z with u
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:j with x
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:a with r
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:g with w
+	delete_count:0 insert_count:11 replace_count:0
+	both have next char, insert l
+	delete_count:9 insert_count:0 replace_count:0
+	both have next char, delete s
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:v with c
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:q with u
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:e with y
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:q with o
+	delete_count:0 insert_count:10 replace_count:0
+	both have next char, insert h
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:t with c
+	delete_count:0 insert_count:0 replace_count:9
+	both have next char, replace:f with n
+	delete_count:0 insert_count:8 replace_count:0
+	both have next char, insert z
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:h with g
+	delete_count:9 insert_count:0 replace_count:0
+	both have next char, delete q
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:v with g
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:d with m
+	delete_count:0 insert_count:0 replace_count:8
+	both have next char, replace:t with i
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:v with u
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:q with u
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:j with a
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:j with v
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:x with d
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:q with e
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:g with t
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:d with n
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:w with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:f with r
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:q with r
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:u with x
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:n with l
+	delete_count:8 insert_count:0 replace_count:0
+	both have next char, delete v
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:p with f
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:x with a
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:t with u
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:h with u
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:z with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:z with y
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:j with c
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:e with c
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:p with k
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:r with l
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:b with h
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:c with j
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:v with b
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:m with s
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:y with d
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:p with q
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:h with r
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:d with i
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:u with z
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:a with n
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:p with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:y with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:o with b
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:a with g
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:r with v
+	delete_count:0 insert_count:0 replace_count:7
+	both have next char, replace:g with m
+	delete_count:0 insert_count:7 replace_count:0
+	both have next char, insert c
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:q with a
+	delete_count:7 insert_count:0 replace_count:0
+	both have next char, delete i
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:i with d
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:v with t
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:h with d
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:r with f
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:y with p
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:q with u
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:d with j
+	delete_count:7 insert_count:0 replace_count:0
+	both have next char, delete o
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:l with x
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:r with h
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:i with o
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:t with s
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:n with g
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:i with v
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:o with b
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:s with l
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:m with l
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:d with n
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:v with y
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:u with o
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:i with q
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:y with p
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:h with v
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:d with u
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:o with a
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:y with m
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:k with s
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:o with y
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:j with l
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:z with y
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:v with x
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:a with t
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:u with p
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:y with q
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:m with h
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:s with c
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:k with b
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:r with f
+	delete_count:0 insert_count:0 replace_count:6
+	both have next char, replace:z with x
+	delete_count:0 insert_count:5 replace_count:0
+	both have next char, insert h
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:n with d
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:c with z
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:u with n
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:f with w
+	delete_count:6 insert_count:0 replace_count:0
+	both have next char, delete a
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:q with w
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:z with m
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:u with c
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:e with x
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:r with h
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:d with v
+	delete_count:0 insert_count:0 replace_count:5
+	both have next char, replace:e with m
+	delete_count:0 insert_count:4 replace_count:0
+	both have next char, insert r
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:p with t
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:q with t
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:c with i
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:e with p
+	delete_count:0 insert_count:0 replace_count:3
+	both have next char, replace:c with a
+	delete_count:5 insert_count:0 replace_count:0
+	both have next char, delete l
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:b with e
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:j with s
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:t with h
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:v with h
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:b with d
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:e with z
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:b with j
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:u with p
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:u with m
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:l with k
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:l with u
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:z with c
+	delete_count:0 insert_count:0 replace_count:4
+	both have next char, replace:a with w
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:o with z
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:k with t
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:g with f
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:k with s
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:f with y
+	delete_count:0 insert_count:3 replace_count:0
+	both have next char, insert x
+	delete_count:0 insert_count:0 replace_count:2
+	both have next char, replace:z with w
+	delete_count:1 insert_count:0 replace_count:0
+	both have next char, delete n
+	delete_count:0 insert_count:2 replace_count:0
+	both have next char, insert p
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:k with d
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:v with g
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:v with m
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:d with l
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:g with c
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:w with a
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:v with t
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:u with l
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:i with q
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:a with q
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:c with w
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:e with g
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:t with l
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:b with e
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:c with k
+	delete_count:0 insert_count:0 replace_count:1
+	both have next char, replace:b with q
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:b with r
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:c with o
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:r with j
+	delete_count:0 insert_count:1 replace_count:0
+	both have next char, insert l
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:o with j
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:e with f
+	delete_count:0 insert_count:1 replace_count:0
+	both have next char, insert j
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:c with t
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:f with h
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:j with m
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:b with i
+	delete_count:0 insert_count:0 replace_count:0
+	both have next char, replace:u with r
+	src have no next char, replace:w with i
+	target longer than src, insert to src, index:212
+	target longer than src, insert to src, index:213
+	target longer than src, insert to src, index:214
+	target longer than src, insert to src, index:215
+	target longer than src, insert to src, index:216
+	target longer than src, insert to src, index:217
+	target longer than src, insert to src, index:218
+	target longer than src, insert to src, index:219
+	target longer than src, insert to src, index:220
+	target longer than src, insert to src, index:221
+	target longer than src, insert to src, index:222
+	target longer than src, insert to src, index:223
+	target longer than src, insert to src, index:224
+	target longer than src, insert to src, index:225
+	target longer than src, insert to src, index:226
+	target longer than src, insert to src, index:227
+	target longer than src, insert to src, index:228
+	target longer than src, insert to src, index:229
+	target longer than src, insert to src, index:230
+	target longer than src, insert to src, index:231
+	target longer than src, insert to src, index:232
+	target longer than src, insert to src, index:233
+	target longer than src, insert to src, index:234
+	target longer than src, insert to src, index:235
+	target longer than src, insert to src, index:236
+	target longer than src, insert to src, index:237
+	target longer than src, insert to src, index:238
+	target longer than src, insert to src, index:239
+	target longer than src, insert to src, index:240
+	target longer than src, insert to src, index:241
+	target longer than src, insert to src, index:242
+	target longer than src, insert to src, index:243
+	target longer than src, insert to src, index:244
+	target longer than src, insert to src, index:245
+	target longer than src, insert to src, index:246
+	target longer than src, insert to src, index:247
+	target longer than src, insert to src, index:248
+	target longer than src, insert to src, index:249
+	target longer than src, insert to src, index:250
+	target longer than src, insert to src, index:251
+	target longer than src, insert to src, index:252
+	target longer than src, insert to src, index:253
+	target longer than src, insert to src, index:254
+	target longer than src, insert to src, index:255
+	target longer than src, insert to src, index:256
+	target longer than src, insert to src, index:257
+	target longer than src, insert to src, index:258
+	target longer than src, insert to src, index:259
+	target longer than src, insert to src, index:260
+	target longer than src, insert to src, index:261
+	target longer than src, insert to src, index:262
+	target longer than src, insert to src, index:263
+	target longer than src, insert to src, index:264
+	target longer than src, insert to src, index:265
+	target longer than src, insert to src, index:266
+src:nqbgetlzozptuajfmvpzqqkuuxrwlhjcuyohpcnzpgkgmieuuavdetngrrxlxfauugyccklhjbsdqriznggbgvmcbamzdtdffpujnxhosgvbllnyoqpvuamsylyxtpqhcbfxhrdznwswmcxhvmrhttipapeshhdzjpmkucwqtztfsyxzwupmdgmlcatlqqwglekqmrojldjfjmthmiriyyavtznlosbixdtjxsjtzfyvvvwsqqfpmxbnkzwotuelfqjlctoaobu
+target:ixotitbzoknoghrrjjwageedzjaglhjvqeqhptfzphkvdtevqjjxqgdwfqunxpxthzzjeprbcvmyphduapyoargcbqmzivhfryqdnlritniosmdvuiyhdoykojzvauymskrzhrncufsqzuerderhpqcecpbjtvbebuullzaqtokgkfxzzupmkvvdgwvuiacetbcbmbcrldoejmcfjbuwyyavtznlosbixdtjxsjtzfyvvvwsqqfpmxbnkzwotuelfqjlctoaobu
+249
