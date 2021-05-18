@@ -113,6 +113,12 @@ void main_version2()
 * 2, 0,1
 * 3, 
 */
+/* generate_list, change how to generate the list by change:
+1. start_value
+2. change_unit and do_change() function
+3. number_count, this determin the length of the list
+in fact, this function should return the length of the list it generated
+*/ 
 void generate_list(unsigned int n, unsigned int* &plist)
 {
     unsigned int number_count = n * (n + 1) / 2;
@@ -126,14 +132,21 @@ void generate_list(unsigned int n, unsigned int* &plist)
         value = do_change(value, change_unit);
     }
 }
-void print_list(unsigned int* plist, int n)
+/*
+print_list, change how to print list by change:
+1. the print format, like between element, it's a backspace or a comma, if there's a new line at the end.
+*/
+void print_list(unsigned int* plist, int length)
 {
-    for(int i=0;i<n;i++)
+    for(int i=0;i<length;i++)
     {
         std::cout<<plist[i]<<" ";
     }
     std::cout<<std::endl;
 }
+/*
+down_up_snake_move, change how it move by change this function's algorithm
+*/
 void down_up_snake_move(int& x, int& y, unsigned int n)
 {
     if(x<0 || x>=n || y<0 || y>=n)
@@ -147,8 +160,8 @@ void down_up_snake_move(int& x, int& y, unsigned int n)
     }
     else if (y== n-1)
     {
-        x = n-1;
         y = x+1;
+        x = n-1;
     }
     else if(x == 0)
     {
@@ -160,6 +173,10 @@ void down_up_snake_move(int& x, int& y, unsigned int n)
         return;
     }
 }
+/*
+turn_list_to_matrix_by_down_up_snake_move, change how list to matrix by change:
+1. coordinate transformation algorithm, that is how the index of element in list, turn into (x,y) point in matrix
+*/
 void turn_list_to_matrix_by_down_up_snake_move(unsigned int* plist, unsigned int** &pmatrix, unsigned int n)
 {
     pmatrix = (unsigned int**)malloc(sizeof(unsigned int*) * n);
@@ -178,18 +195,25 @@ void turn_list_to_matrix_by_down_up_snake_move(unsigned int* plist, unsigned int
         }
         else
         {
-            pmatrix[x]+y = nullptr;
+            pmatrix[x][y] = -1;
         }
         down_up_snake_move(x, y,n);
     }
 }
+/*
+print_matrix, the data type is not correct,
+it doesn't turn out what I want,
+I hope the data type can both present the data validation and the data value(if valid).
+But I can't assign nullptr to 2D array.
+And the null element can have a specific print format, like "null".
+*/
 void print_matrix(unsigned int** pmatrix, int n)
 {
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
         {
-            if(pmatrix[i]+j == NULL)
+            if(pmatrix[i][j] == -1)
             {
                 std::cout<<"  ";
             }

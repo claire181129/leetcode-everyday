@@ -12,6 +12,7 @@ Solutions of algorithm questions from leetcode and other website.
 | 2021-03-30 | nowcoder huawei-interview medium x 2(HJ57,HJ46,HJ67) |
 
 about algorithm question:
+
 1. case study, manually compute the example case, see how you get the result.
 2. case coverage, what situation is covered in your code? What is not? From first line of code, record case in comment, write debug output for this case
 3. debug code should be easily distinguishable between each case. with g++, #ifdef DEBUG, compile with -DDEBUG, or -D anything, #ifdef anything.
@@ -25,3 +26,5 @@ about algorithm question:
 11. code block completity, code should be in block, should be tested as block, should be block complete(what's input, what's output).
 12. code that's not elegant, not short, not clear, not block complete, is not code, it's trash. like HJ67.
 13. If you're sure you're doing it wrong way, and you already got bad feeling, you should quit, take a break.
+14. the nested if/while/loop, shouldn't be more than 3.
+15. function, code block shouldn't be more than 30 lines.
