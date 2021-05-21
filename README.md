@@ -27,4 +27,4 @@ about algorithm question:
 12. code that's not elegant, not short, not clear, not block complete, is not code, it's trash. like HJ67.
 13. If you're sure you're doing it wrong way, and you already got bad feeling, you should quit, take a break.
 14. the nested if/while/loop, shouldn't be more than 3.
-15. function, code block shouldn't be more than 30 lines.
+15. function, code block, algorithm block shouldn't be more than 30 lines. So you can read and know what this code do quickly.
