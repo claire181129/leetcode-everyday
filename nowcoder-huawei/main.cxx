@@ -1,173 +1,113 @@
 #include <iostream>
-#include <vector>
-struct Choice{
-    int price;
-    int importance;
-    int flag;
-    int choose_flag;//0 = not decided, 1 = choosed, -1 = not choosed
+struct NODE{
+    int value;
+    NODE* next_node = NULL;
 };
-int get_choose_index(std::vector<Choice> list)
+struct LIST{
+    NODE* pnode;
+};
+void insert_node_to_list(LIST &list,int target_node,int insert_node)
 {
-    for(int i=0;i<list.size();i++)
+    NODE* pnode = list.pnode;
+    while(pnode != NULL)
     {
-        if(list[i].choose_flag == 0)
+        if(pnode->value == target_node)
         {
-            return i;
+            NODE new_node;
+            new_node.value = insert_node;
+            new_node.next_node = pnode->next_node;
+            pnode->next_node = &new_node;
+            return;
         }
+        pnode = pnode->next_node;
     }
-    return -1;
 }
-int get_main_index(std::vector<Choice> list, int index)
+void delete_node_from_list(LIST &list,int target_node)
 {
-    int count = 0;
-    for(int i=0;i<list.size();i++)
+    NODE* &pnode = list.pnode;
+    NODE* last_node = NULL;
+    while(pnode != NULL)
     {
-        if(list[i].flag == 0)
+        if(pnode->value == target_node)
         {
-            count+=1;
-            if(count == index)
+            if(last_node != NULL)
             {
-                return i;
+                last_node->next_node = pnode->next_node;
+            }
+            else
+            {
+                pnode = pnode->next_node;
             }
         }
+        last_node = pnode;
+        pnode = pnode->next_node;
     }
 }
-int bestPurchaseList(std::vector<Choice> list, int money)
+void print_list(LIST list)
 {
-    int best;
+    if(list.pnode == NULL)
+    {
+        std::cout<<"NULL"<<std::endl;
+    }
+    else{
+        NODE* the_node = list.pnode;
+        while(the_node != NULL)
+        {
+            std::cout<<the_node->value<<" ";
+            the_node = the_node->next_node;
+        }
+    }
+}
+int list_size(LIST list)
+{
+    NODE* pnode = list.pnode;
+    int counter = 0;
+    while(pnode != NULL){
+        counter+=1;
+        pnode = pnode->next_node;
+    }
+    return counter;
 }
 int main()
 {
-    int money, count;
-    while(std::cin>>money>>count)
+    int count;
+    while(std::cin>>count)
     {
-        std::vector<Choice> purchaseList;
-        while(count>0)
+        int first_node;
+        std::cin>>first_node;
+        NODE node;
+        node.value = first_node;
+        node.next_node = NULL;
+        LIST list;
+        list.pnode = &node;
+        while(count>1)
         {
-            Choice temp;
-            std::cin>>temp.price>>temp.importance>>temp.flag;
-            temp.choose_flag = 0;
-            purchaseList.push_back(temp);
-            count--;
+            int previous_node, new_node;
+            std::cin>>new_node>>previous_node;
+            std::cout<<"insert: "<<new_node<<" after:"<<previous_node<<std::flush;   
+            auto& pnode = list.pnode;   
+            while(pnode != NULL)    
+            {
+                if(pnode->value == previous_node)
+                {
+                    NODE* temp_node;
+                    temp_node->value = new_node;
+                    temp_node->next_node = pnode->next_node;
+                    pnode->next_node = temp_node;
+                    std::cout<<temp_node->value<<"    inserted"<<std::endl;
+                    print_list(list);
+                    break;
+                }
+                pnode = pnode->next_node;
+            }
+            count-=1;
         }
-        int bestresult = bestPurchaseList(purchaseList,money);
-        std::cout<<bestresult<<std::endl;
+        //int delete_node;
+        //std::cin>>delete_node;
+        //delete_node_from_list(list,delete_node);
+        //std::cout<<"List Size:"<<std::flush;
+        //std::cout<<list_size(list)<<std::endl;
+        //print_list(list);
     }
     return 0;
 }
-/*
-1000 5
-800 2 0
-400 5 1
-300 5 1
-400 3 0
-500 2 0
-
-2200
-
-choices -> final choose
-
-choice make up algorithm:
-sum <= money
-if it's a sub thing, it's main thing is in the plan
-
-choose algorithm:
-v[i]*h[j] is the max
-
-1000 5
-800 2 0
-400 5 1
-300 5 1
-400 3 0
-500 2 0
-plan A: 800*1           importance = 800*2 = 1600
-plan B: 400*1           importance = 400*3 = 800
-plan C: 500*1           importance = 500*2 = 1000
-plan D: 400*1 + 500*1   importance = 400*3+500*2 = 2200
-
-plan D is the best choice
-
-the limit is changed after every choice made, choices need to refer to each other.
-800 choosed + 800 not choosed = all solutions
-800 choosed -> no choice, return the sum of this solution
-800 not choosed -> have choice, return recursive function call.
-
-800 2 0 choose
-400 5 1 not choose
-300 5 1 not choose
-400 3 0 not choose
-500 2 0 not choose
-
-800 2 0 not choose
-400 5 1 not choose
-300 5 1 not choose
-400 3 0 not choose
-500 2 0 not choose
-
-800 2 0 not choose
-400 5 1 not choose
-300 5 1 not choose
-400 3 0 choose
-500 2 0
-
-800 2 0 not choose
-400 5 1 not choose
-300 5 1 not choose
-400 3 0 not choose
-500 2 0
-
-choose algorithm:
-1. price <= money
-2. main or main choosed
-
-2000 10
-
-500 1 0 500 109             3
-300 5 1     133.3           4   
-400 5 1     150             8
-
-400 4 0 100                 2   y
-200 5 0 40                  1   y
-
-320 2 0 160     135.5       5   y
-500 4 5 136.6               6
-400 3 5 144                 7
-
-400 4 0 100                 2   y
-410 3 0 136.6               6
-
-200*5+400*4+400*4+500*1+300*5=1000+1600+1600+1500=5700
-200*5+400*4+400*4+320*2+500*4 = 
-
-right solution is:
-2000 10
-500 1 0 n
-400 4 0 y
-300 5 1 n
-400 5 1 n
-200 5 0 y
-500 4 5 y
-400 4 0 y
-320 2 0 n
-410 3 0 y
-400 3 5 n
-200*5 + 400*4 + 400*4 + 500*4 + 410*3 = 7430
-1910
-
-code trace：2000 10
-500 1 0
-400 4 0
-300 5 1
-400 5 1
-200 5 0
-500 4 5
-400 4 0
-320 2 0
-410 3 0
-400 3 5
-
-
-fun 1:
-choose_index = 0;
-
-*/
